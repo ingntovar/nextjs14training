@@ -2,10 +2,8 @@ import { Card } from '@/app/ui/dashboard/cards';
 import IncomeChart from '@/app/ui/dashboard/income-chart';
 import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import { poppins } from '@/app/ui/fonts';
-import { fetchIncome } from '../lib/data';
 
 export default async function Page() {
-  const income = await fetchIncome()
 
   return (
     <main className="rounded-xl bg-neutral-900 p-6">
