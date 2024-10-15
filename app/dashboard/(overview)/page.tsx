@@ -1,7 +1,9 @@
-import { Card } from '@/app/ui/dashboard/cards';
+import CardWrapper, { Card } from '@/app/ui/dashboard/cards';
 import IncomeChart from '@/app/ui/dashboard/income-chart';
 import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import { poppins } from '@/app/ui/fonts';
+import { Suspense } from 'react';
+import { CardsSkeleton, IncomeChartSkeleton, LatestInvoicesSkeleton } from '@/app/ui/skeletons';
 
 export default async function Page() {
 
@@ -13,18 +15,17 @@ export default async function Page() {
         Dashboard
       </h1>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {/* <Card title="Earned" value={totalFulfilledInvoices} type="earned" /> */}
-        {/* <Card
-          title="In Progress"
-          value={totalAwaitingInvoices}
-          type="awaiting"
-        /> */}
-        {/* <Card title="All Invoices" value={numberOfInvoices} type="invoices" /> */}
-        {/* <Card title="Total Sellers" value={numberOfSellers} type="sellers" /> */}
+        <Suspense fallback={<CardsSkeleton />} >
+          <CardWrapper />
+        </Suspense>
       </div>
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
-        {/* <IncomeChart income={income} /> */}
-        {/* <LatestInvoices latestInvoices={latestInvoices} /> */}
+        <Suspense fallback={<IncomeChartSkeleton/>}>
+          <IncomeChart />
+        </Suspense>
+        <Suspense fallback={<LatestInvoicesSkeleton />}>
+          <LatestInvoices />
+        </Suspense>
       </div>
     </main>
   );
